@@ -39,7 +39,7 @@ while [ true ]; do
 	#Check disk usage only once an hour
 	if [ $TIME -eq "41" ]; then
 		DISK=`get_disk_usage`
-		if [ $DISK > "90%" ]; then
+		if [ ${DISK%?} -gt "90" ]; then
 			echo "Disk is almost full on $HOSTNAME sandbox. Current usage is $DISK" | mail -s "Disk is almost full on $HOSTNAME sandbox" pavansukalkar@sigtuple.com
 		fi
 	fi
