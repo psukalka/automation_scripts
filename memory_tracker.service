@@ -1,0 +1,17 @@
+[Unit]
+Description=Processes to track health of different services, disk and memory usage. Sends mail if anything goes beyond threshold.
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=stsys
+Group=stsys
+WorkingDirectory=/deploy/kurma-stlabs
+ExecStart=/bin/bash -ce /home/stsys/memory_profile.sh
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+TimeoutStopSec=5s
+
+[Install]
+WantedBy=multi-user.target
